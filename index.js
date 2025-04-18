@@ -4,8 +4,8 @@ const app = express();
 const client = new Client();
 
 const status = {
-  name: "Main game bareng",
-  type: 0,
+  name: "Manchester United - Old Trafford",
+  type: 3,
   url: null,
 };
 

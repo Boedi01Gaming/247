@@ -17,7 +17,7 @@ client.on("ready", () => {
       type: status.type,
       url: status.url || null,
     }],
-    status: "online",
+    status: "dnd",
   });
 });
 

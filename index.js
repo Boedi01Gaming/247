@@ -1,27 +1,24 @@
-const { Client } = require("discord.js-selfbot-v13");
-const express = require("express");
-const app = express();
+require('dotenv').config();
+const { Client } = require('discord.js-selfbot-v13');
 const client = new Client();
 
-const status = {
-  name: "Manchester United - Old Trafford",
-  type: 3,
-  url: null,
-};
+client.on('ready', async () => {
+    console.log(`Bot berhasil login sebagai ${client.user.username}`);
 
-client.on("ready", () => {
-  console.log(`${client.user.username} sudah online sebagai selfbot!`);
-  client.user.setPresence({
-    activities: [{
-      name: status.name,
-      type: status.type,
-      url: status.url || null,
-    }],
-    status: "dnd",
-  });
+    try {
+        await client.user.setPresence({
+            status: 'dnd', // 'online', 'idle', 'dnd', 'invisible'
+            activities: [
+                {
+                    name: 'Manchester United - Old Trafford', // Ganti dengan aktivitas lo
+                    type: 'WATCHING', // 'PLAYING', 'STREAMING', 'LISTENING', 'WATCHING'
+                },
+            ],
+        });
+        console.log("Presence berhasil diupdate!");
+    } catch (error) {
+        console.error("Error setting presence:", error);
+    }
 });
 
-client.login(process.env.DISCORD_TOKEN);
-
-app.get("/", (req, res) => res.send("Selfbot is running!"));
-app.listen(3000, () => console.log("Keep-alive server running"));
+client.login(process.env.TOKEN);
